@@ -17,10 +17,10 @@ namespace UnitTestProject1
         {
             Employee.Employees Empl = new Employee.Employees();
             Empl.HeIsMan = true;
-            Empl.Birthday = Convert.ToDateTime("25.06.1985");
-            Empl.Name = "Dmitry";
+            Empl.Birthday = Convert.ToDateTime("22.01.1975");
+            Empl.Name = "Denis";
             Empl.LastName = "Lobanov";
-            Empl.SurName = "Sergeevich";
+            Empl.SurName = "Evgenjevich";
             Empl.StartWorking = Convert.ToDateTime("01.09.2009");
             Assert.AreNotEqual(Empl, null);
         }
