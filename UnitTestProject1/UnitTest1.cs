@@ -1,5 +1,6 @@
 ﻿using System;
 using DocumentoDel;
+using System.Windows;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTestProject1
@@ -12,9 +13,16 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void MakeTemp()
+        public void MakeEmployee()
         {
-            Console.Write("Hello world");
+            Employee.Employees Empl = new Employee.Employees();
+            Empl.HeIsMan = true;
+            Empl.Birthday = Convert.ToDateTime("25.06.1985");
+            Empl.Name = "Dmitry";
+            Empl.LastName = "Lobanov";
+            Empl.SurName = "Sergeevich";
+            Empl.StartWorking = Convert.ToDateTime("01.09.2009");
+            Assert.AreNotEqual(Empl, null);
         }
     }
 }

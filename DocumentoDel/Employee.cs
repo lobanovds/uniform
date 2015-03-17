@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Xml;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,6 +13,8 @@ namespace DocumentoDel
 {
     public partial class Employee : Form
     {
+
+        public string[] EmployeeColumnsNames = new string[] { "Tabel", "HeIsMan", "LastName", "Name", "Surname", "Birthday", "StartWorking" };
 
         public struct SizeOfEmployeeByYear
         {
@@ -33,7 +36,6 @@ namespace DocumentoDel
             public String SurName;
             public DateTime Birthday;
             public DateTime StartWorking;
-            public int PositionByTabel;
         }
 
         public struct PositionChange
@@ -64,6 +66,8 @@ namespace DocumentoDel
             comboBox1.Text = DateTime.Now.Year.ToString();
             createEmployeesTable();
             SvidDataGridInit();
+            OpenEmploeyeesData();
+            dataGridView1[0, 0].Selected = true;
         }
 
         //TODO: Добавить в таблицу с должностями
@@ -73,6 +77,7 @@ namespace DocumentoDel
         private void createEmployeesTable()
         {
             EmployeesTable.Reset();
+            //EmployeesTable.Columns.Add("Row_ID");
             EmployeesTable.Columns.Add("Tabel");
             EmployeesTable.Columns.Add("HeIsMan");
             EmployeesTable.Columns.Add("LastName");
@@ -80,7 +85,6 @@ namespace DocumentoDel
             EmployeesTable.Columns.Add("SurName");
             EmployeesTable.Columns.Add("Birthday");
             EmployeesTable.Columns.Add("StartWorking");
-            EmployeesTable.Columns.Add("PositionByTabel");
             EmployeesTable.AcceptChanges();
         }
 
@@ -103,6 +107,7 @@ namespace DocumentoDel
         private void SvidDataGridInit()
         {
             dataGridView1.DataSource = EmployeesTable;
+            //Ширина столбцов
             dataGridView1.Columns["Tabel"].Width = 60;
             dataGridView1.Columns["HeIsMan"].Width = 60;
             dataGridView1.Columns["LastName"].Width = 130;
@@ -110,8 +115,8 @@ namespace DocumentoDel
             dataGridView1.Columns["Surname"].Width = 130;
             dataGridView1.Columns["Birthday"].Width = 100;
             dataGridView1.Columns["StartWorking"].Width = 80;
-            dataGridView1.Columns["PositionByTabel"].Width = 80;
 
+            //Вспылвающие подсказки
             dataGridView1.Columns["Tabel"].ToolTipText = "Табель";
             dataGridView1.Columns["HeIsMan"].ToolTipText = "Пол";
             dataGridView1.Columns["LastName"].ToolTipText = "Фамилия";
@@ -119,8 +124,8 @@ namespace DocumentoDel
             dataGridView1.Columns["Surname"].ToolTipText = "Отчество";
             dataGridView1.Columns["Birthday"].ToolTipText = "День рождения";
             dataGridView1.Columns["StartWorking"].ToolTipText = "Дата начала работы";
-            dataGridView1.Columns["PositionByTabel"].ToolTipText = "Должность";
 
+            //Заголовки колонок
             dataGridView1.Columns["Tabel"].HeaderText = "Таб.";
             dataGridView1.Columns["HeIsMan"].HeaderText = "Пол";
             dataGridView1.Columns["LastName"].HeaderText = "Фамилия";
@@ -128,20 +133,57 @@ namespace DocumentoDel
             dataGridView1.Columns["Surname"].HeaderText = "Отчество";
             dataGridView1.Columns["Birthday"].HeaderText = "ДР";
             dataGridView1.Columns["StartWorking"].HeaderText = "Устроился";
-            dataGridView1.Columns["PositionByTabel"].HeaderText = "Должность";
 
-            /*
-            dataGridView1.Columns["Tabel"]
-            dataGridView1.Columns["HeIsMan"]
-            dataGridView1.Columns["LastName"]
-            dataGridView1.Columns["Name"]
-            dataGridView1.Columns["Surname"]
-            dataGridView1.Columns["Birthday"]
-            dataGridView1.Columns["StartWorking"]
-             * 
-             * .ToolTipText = "";
-             * .HeaderText = "";
-             */
+            
+        }
+
+
+        private void OpenEmploeyeesData()
+        {
+            DataSet dataSet1 = new DataSet();
+
+            try
+            {
+                dataSet1.ReadXml(@"c:\shablon\data\employee.xml", XmlReadMode.Auto);
+
+                EmployeesTable = dataSet1.Tables[0];
+                EmployeesTable.Columns.Remove("Row_ID");
+                for (int i = 0; i < EmployeesTable.Rows.Count; i++)
+                {
+                    EmployeesTable.Rows[i]["HeIsMan"] = Convert.ToBoolean(EmployeesTable.Rows[i]["HeIsMan"]) ? "Муж" : "Жен";
+                }
+                EmployeesTable.AcceptChanges();
+                dataGridView1.DataSource = EmployeesTable;
+            }
+            catch { }
+        }
+
+        private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                DataTable dt = (DataTable)dataGridView1.DataSource;
+                XmlTextWriter xmlw1 = new XmlTextWriter(@"c:\shablon\data\employee.xml", UnicodeEncoding.UTF8);
+                xmlw1.WriteStartDocument();
+                xmlw1.WriteStartElement("Element");
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    xmlw1.WriteStartElement("ROW");
+                    xmlw1.WriteAttributeString("ROW_ID", i.ToString());
+                    foreach (string textc in EmployeeColumnsNames)
+                    {
+                        if (textc!="HeIsMan")
+                            xmlw1.WriteAttributeString(textc, dt.Rows[i][textc].ToString());
+                        else
+                            xmlw1.WriteAttributeString(textc, dt.Rows[i][textc].ToString()=="Муж"?"true":"false");
+
+                    }
+                    xmlw1.WriteFullEndElement();
+                }
+                xmlw1.WriteFullEndElement();
+                xmlw1.WriteEndDocument();
+                xmlw1.Close();
+            }
         }
 
     }
