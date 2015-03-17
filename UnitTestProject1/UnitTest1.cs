@@ -14,6 +14,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void MakeTemp()
         {
+            Console.Write("Hello world");
         }
     }
 }
