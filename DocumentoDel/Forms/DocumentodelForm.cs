@@ -1164,5 +1164,12 @@ namespace DocumentoDel
             Empl.Activate();
             Empl.Show();
         }
+
+        private void нормыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form norms = new Forms.Norms();
+            norms.Activate();
+            norms.Show();
+        }
     }
 }

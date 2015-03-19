@@ -95,6 +95,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокПодстанцийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сотрудникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.очиститьТаблицуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.тКП160ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -109,7 +110,8 @@
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripNumbersNotExist = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.бнToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.сотрудникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.спецодеждаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.нормыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.TabPageSchetchiki.SuspendLayout();
@@ -763,7 +765,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.настройкиToolStripMenuItem,
-            this.очиститьТаблицуToolStripMenuItem});
+            this.очиститьТаблицуToolStripMenuItem,
+            this.спецодеждаToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(976, 24);
@@ -785,6 +788,13 @@
             this.списокПодстанцийToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.списокПодстанцийToolStripMenuItem.Text = "Список подстанций";
             this.списокПодстанцийToolStripMenuItem.Click += new System.EventHandler(this.списокПодстанцийToolStripMenuItem_Click);
+            // 
+            // сотрудникиToolStripMenuItem
+            // 
+            this.сотрудникиToolStripMenuItem.Name = "сотрудникиToolStripMenuItem";
+            this.сотрудникиToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.сотрудникиToolStripMenuItem.Text = "Сотрудники";
+            this.сотрудникиToolStripMenuItem.Click += new System.EventHandler(this.сотрудникиToolStripMenuItem_Click);
             // 
             // очиститьТаблицуToolStripMenuItem
             // 
@@ -884,12 +894,20 @@
             this.бнToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             this.бнToolStripMenuItem.Text = "б/н";
             // 
-            // сотрудникиToolStripMenuItem
+            // спецодеждаToolStripMenuItem
             // 
-            this.сотрудникиToolStripMenuItem.Name = "сотрудникиToolStripMenuItem";
-            this.сотрудникиToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.сотрудникиToolStripMenuItem.Text = "Сотрудники";
-            this.сотрудникиToolStripMenuItem.Click += new System.EventHandler(this.сотрудникиToolStripMenuItem_Click);
+            this.спецодеждаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.нормыToolStripMenuItem});
+            this.спецодеждаToolStripMenuItem.Name = "спецодеждаToolStripMenuItem";
+            this.спецодеждаToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
+            this.спецодеждаToolStripMenuItem.Text = "Спецодежда";
+            // 
+            // нормыToolStripMenuItem
+            // 
+            this.нормыToolStripMenuItem.Name = "нормыToolStripMenuItem";
+            this.нормыToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.нормыToolStripMenuItem.Text = "Нормы";
+            this.нормыToolStripMenuItem.Click += new System.EventHandler(this.нормыToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -1000,6 +1018,8 @@
         private System.Windows.Forms.ToolStripMenuItem бнToolStripMenuItem;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.ToolStripMenuItem сотрудникиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem спецодеждаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem нормыToolStripMenuItem;
     }
 }
 

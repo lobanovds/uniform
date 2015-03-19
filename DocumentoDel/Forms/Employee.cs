@@ -63,11 +63,12 @@ namespace DocumentoDel
         public Employee()
         {
             InitializeComponent();
-            comboBox1.Text = DateTime.Now.Year.ToString();
             createEmployeesTable();
             SvidDataGridInit();
             OpenEmploeyeesData();
             dataGridView1[0, 0].Selected = true;
+            foreach (String tsi in new Forms.Data().Positions)
+                contextMenuStrip1.Items.Add(tsi);
         }
 
         //TODO: Добавить в таблицу с должностями
@@ -176,7 +177,6 @@ namespace DocumentoDel
                             xmlw1.WriteAttributeString(textc, dt.Rows[i][textc].ToString());
                         else
                             xmlw1.WriteAttributeString(textc, dt.Rows[i][textc].ToString()=="Муж"?"true":"false");
-
                     }
                     xmlw1.WriteFullEndElement();
                 }
@@ -184,6 +184,11 @@ namespace DocumentoDel
                 xmlw1.WriteEndDocument();
                 xmlw1.Close();
             }
+        }
+
+        private void инженерToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
     }
