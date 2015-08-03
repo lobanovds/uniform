@@ -1076,7 +1076,8 @@ namespace DocumentoDel
             DataSet DST = new DataSet();
             try { DST.Tables.Remove("IDMANOMETR"); }
             catch{}
-            DST.Tables.Add((DataTable)dataGridView3.DataSource);
+            try { DST.Tables.Add(((DataTable)dataGridView3.DataSource).Copy()); }
+            catch { MessageBox.Show(DST.Tables.Count.ToString()); }
             DST.WriteXml(String.Format(pathmano + "\\{0:yyyy}\\{0:MM}\\temp.xml", DTtemp));
         }
         

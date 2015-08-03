@@ -70,8 +70,9 @@ namespace DocumentoDel.Forms
             xmlw1.WriteStartDocument();
             xmlw1.WriteStartElement("Element");
 
-            foreach (DataGridViewRow DR in dataGridView1.Rows)
+            /*foreach (DataGridViewRow DR in dataGridView1.Rows)
             { 
+                xmlw1.WriteStartElement("ROW");
                 if 
             }
             
@@ -88,7 +89,7 @@ namespace DocumentoDel.Forms
                         xmlw1.WriteAttributeString(textc, dt.Rows[i][textc].ToString() == "Муж" ? "true" : "false");
                 }
                 xmlw1.WriteFullEndElement();
-            }
+            }*/
             xmlw1.WriteFullEndElement();
             xmlw1.WriteEndDocument();
             xmlw1.Close();
